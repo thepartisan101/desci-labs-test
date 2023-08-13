@@ -14,9 +14,9 @@ interface LayoutProps {
 export default function Layout({ onLogout, children }: LayoutProps): JSX.Element {
   return (
     <>
-      <Navbar onLogout={onLogout}/>
-      {/* <ModeToggle /> */}
       <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <Navbar onLogout={onLogout}/>
+      {/* <ModeToggle /> */}
         <main>{children}</main>
         <Toaster />
       </ThemeProvider>

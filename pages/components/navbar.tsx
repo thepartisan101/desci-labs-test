@@ -7,6 +7,8 @@ import { Button } from './ui/button';
 import Link from 'next/link';
 import { ModeToggle } from './modeToggle'
 import { Settings } from "lucide-react"
+import { ConnectButton } from '@rainbow-me/rainbowkit';
+
 
 
 interface NavbarProps {
@@ -43,10 +45,7 @@ const Navbar: React.FC<NavbarProps> = ({ onLogout }) => {
             {/* Settings</Button> */}
         </Link>
         <ModeToggle />
-        <Avatar>
-          <AvatarFallback>User</AvatarFallback>
-        </Avatar>
-        <Button variant="link" onClick={handleLogout}>Disconnect</Button>
+        <ConnectButton showBalance={false} />
       </div>
     </div>
   );
