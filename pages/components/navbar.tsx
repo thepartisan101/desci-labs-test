@@ -26,9 +26,9 @@ const Navbar: React.FC<NavbarProps> = ({ onLogout }) => {
   return (
     <div className="flex items-center justify-between py-3 px-5">
       <div className="flex items-center gap-2">
-        <div className="relative flex items-center justify-center rounded-full w-12 h-12 p-3  ">
+        <div className="relative flex items-center justify-center rounded-full w-12 h-12 p-3 bg-black dark:bg-transparent">
           <Image
-            className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70]"
+            className="relative"
             src="/logo.svg"
             alt="Desci Lab Logo"
             width={33}
