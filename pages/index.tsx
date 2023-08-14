@@ -149,8 +149,8 @@ export default function Home() {
               <NotesList result={result} handleLoad={handleLoad} />
             </div>
           ) : (
-            <div className="w-full flex flex-col items-center justify-center">
-              <h3>Please connect your wallet to access</h3>
+            <div className="w-full justify-center">
+              <h3 className="text-center">Please connect your wallet to access</h3>
               <Animation />
             </div>
           )}
