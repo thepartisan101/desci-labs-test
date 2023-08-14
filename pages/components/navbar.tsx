@@ -39,11 +39,6 @@ const Navbar: React.FC<NavbarProps> = ({ onLogout }) => {
         <h1 className="scroll-m-20 text-xl font-semibold tracking-tight">DeSci Labs</h1>
       </div>
       <div className="flex items-center gap-2">
-        <Link href="/settings">
-          {/* <Button variant="link"> */}
-            <Settings className="mr-2 h-6 w-6" />
-            {/* Settings</Button> */}
-        </Link>
         <ModeToggle />
         <ConnectButton showBalance={false} />
       </div>
