@@ -1,6 +1,7 @@
 import "../styles/globals.css";
 import '@rainbow-me/rainbowkit/styles.css';
 import type { AppProps } from "next/app";
+import { useState, useEffect } from 'react';
 
 import {
   RainbowKitProvider,
@@ -57,23 +58,34 @@ const wagmiConfig = createConfig({
   webSocketPublicClient,
 });
 
+
 export default function App({ Component, pageProps }: AppProps) {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    setReady(true)
+  }, []);
+  
   return (
-    <WagmiConfig config={wagmiConfig}>
-      <RainbowKitProvider 
-        appInfo={testAppInfo} 
-        chains={chains} 
-        theme={{
-          lightMode: lightTheme(),
-          darkMode: darkTheme({
-            accentColor: '#06b6d4',
-            borderRadius: 'small',
-            overlayBlur: 'small'
-          })
-        }}
-        >
-        <Component {...pageProps} />;
-      </RainbowKitProvider>
-    </WagmiConfig>
+    <>
+      {ready ? (
+        <WagmiConfig config={wagmiConfig}>
+          <RainbowKitProvider 
+            appInfo={testAppInfo} 
+            chains={chains} 
+            theme={{
+              lightMode: lightTheme(),
+              darkMode: darkTheme({
+                accentColor: '#06b6d4',
+                borderRadius: 'small',
+                overlayBlur: 'small'
+              })
+            }}
+            >
+            <Component {...pageProps} />;
+          </RainbowKitProvider>
+        </WagmiConfig> 
+      ): null} 
+    </>
   );
 }
