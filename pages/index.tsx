@@ -10,6 +10,7 @@ import { NoteForm } from "./components/noteForm";
 import { RefreshCw } from "lucide-react";
 import { useAccount } from 'wagmi'
 import CommandMenu from "./components/commandMenu";
+import Animation from "./components/animation";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -128,9 +129,9 @@ export default function Home() {
       <Layout onLogout={() => console.log('Logging out...')}>
         <div className="flex flex-col gap-3 items-center mx-auto">
           <h1 className="scroll-m-20 text-xl font-semibold tracking-tight lg:text-3xl mb-4">
-            Your IPFS Notes
+            {address ? "Your IPFS Notes" : "Welcome to DeSciLabs Notes"}
           </h1>
-          {result && (
+          {address && result && (
             <div className="mb-3">
               <p className="text-sm text-cyan-600 dark:text-cyan-400">
                 Press{" "}
@@ -148,7 +149,10 @@ export default function Home() {
               <NotesList result={result} handleLoad={handleLoad} />
             </div>
           ) : (
-            <h3>Please connect your wallet to access</h3>
+            <div className="w-full flex flex-col items-center justify-center">
+              <h3>Please connect your wallet to access</h3>
+              <Animation />
+            </div>
           )}
         </div>
       </Layout>
