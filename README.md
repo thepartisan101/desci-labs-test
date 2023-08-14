@@ -27,12 +27,12 @@ Note: There is a configuration for a local IPFS node that uses a `swarm key` in 
 
 ### Bonus Points (we suggest trying at least one)
 
-1. [ ] Figure out how to allow the notes to survive between server restarts
+1. [x] Figure out how to allow the notes to survive between server restarts
 2. [x] Make the UI modern and smooth (we have pre-included [TailwindCSS](https://tailwindcss.com/docs/utility-first))
-3. [ ] Allow users to sign notes using encryption
+3. [x] Allow users to sign notes using encryption
 4. [ ] Allow support for file uploads
 5. [ ] Enable IPLD support (nested directory file management)
-6. [ ] Enable search support
+6. [x] Enable search support
 7. [ ] Support for 10k+ notes
 8. [ ] Enable multiplayer (multiple collaborators in real-time can work on notes)
 9. [ ] Enable WebGL/3D support for exploring notes (or just to look cool)
