@@ -22,22 +22,28 @@ Note: There is a configuration for a local IPFS node that uses a `swarm key` in 
 
 ### The challenge here is to enable the following functions
 
-1. Write text notes in the UI and save them to IPFS
-2. Display these notes to the user on-demand
+1. [x] Write text notes in the UI and save them to IPFS
+2. [x] Display these notes to the user on-demand &rarr; _User can log in with different wallets and notes are updated inmediately upon switching wallet_
 
 ### Bonus Points (we suggest trying at least one)
 
-1. Figure out how to allow the notes to survive between server restarts
-2. Make the UI modern and smooth (we have pre-included [TailwindCSS](https://tailwindcss.com/docs/utility-first))
-3. Allow users to sign notes using encryption
-4. Allow support for file uploads
-5. Enable IPLD support (nested directory file management)
-6. Enable search support
-7. Support for 10k+ notes
-8. Enable multiplayer (multiple collaborators in real-time can work on notes)
-9. Enable WebGL/3D support for exploring notes (or just to look cool)
-10. Write highly useful tests
-11. ??? (surprise us)
+1. [x] Figure out how to allow the notes to survive between server restarts
+       &rarr; _Implemented .pin functionality to make data persist_
+2. [x] Make the UI modern and smooth (we have pre-included [TailwindCSS](https://tailwindcss.com/docs/utility-first))
+       &rarr; _Added [ShadcnUI](https://ui.shadcn.com/) UI components (based on Radix + Tailwind CSS) and a Light/Dark mode switch_
+3. [x] Allow users to sign notes using encryption
+       &rarr; _Added Rainbowkit + wagmi libraries to allow user sign in and require signature before upload_
+4. [ ] Allow support for file uploads
+5. [ ] Enable IPLD support (nested directory file management)
+6. [x] Enable search support
+       &rarr; _Used a shadcnui component to add a note search dialog with keyboard shortcut_
+7. [ ] Support for 10k+ notes
+8. [ ] Enable multiplayer (multiple collaborators in real-time can work on notes)
+9. [x] Enable WebGL/3D support for exploring notes (or just to look cool)
+       &rarr; _Added a 3D animation when user is not logged in using a [Spline](https://spline.design/) asset and [react-spline](https://github.com/splinetool/react-spline)_
+10. [ ] Write highly useful tests
+11. [ ] Load news/research paper briefs from api - add notes with ref to paper url
+12. [ ] ChatGPT to speak with notes?
 
 ## We respect your time
 
