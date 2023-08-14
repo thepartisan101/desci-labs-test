@@ -9,6 +9,7 @@ import { Button } from "./components/ui/button";
 import { NoteForm } from "./components/noteForm";
 import { RefreshCw } from "lucide-react";
 import { useAccount } from 'wagmi'
+import CommandMenu from "./components/commandMenu";
 
 
 const inter = Inter({ subsets: ["latin"] });
@@ -33,7 +34,19 @@ export default function Home() {
 
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<BasicIpfsData[] | null>(null);
-
+  // Declare state for note search dialog
+  const [open, setOpen] = useState(false);
+  
+  useEffect(() => {
+    const down = (e: KeyboardEvent) => {
+      if (e.key === "k" && (e.metaKey || e.ctrlKey)) {
+        e.preventDefault();
+        setOpen((open) => !open);
+      }
+    };
+    document.addEventListener("keydown", down);
+    return () => document.removeEventListener("keydown", down);
+  }, []);
 
   const handleLoad = useCallback(async () => {
     setLoading(true);
@@ -72,7 +85,7 @@ export default function Home() {
       size="icon"
       variant="outline"
       className={classNames(
-        "hover:bg-white text-white hover:text-black rounded-md p-2 drop-shadow-md w-32",
+        "dark:hover:bg-white bg-black hover:bg-gray-800 text-white hover:text-white dark:hover:text-black rounded-md p-2 drop-shadow-md w-32",
         loading ? "animate-pulse" : ""
       )}
     >
@@ -82,7 +95,7 @@ export default function Home() {
   );
 
   const Note: React.FC<NoteProps> = ({ note }) => (
-    <div className="flex flex-col hover:bg-slate-800 rounded-sm p-3">
+    <div className="flex flex-col dark:hover:bg-slate-800 hover:bg-slate-300 rounded-sm p-3">
       <span>{note.content}</span>
       <span className="text-sm text-muted-foreground">
         CID: {note.cid ? note.cid.substring(0, 30) + "..." : "N/A"}
@@ -91,13 +104,15 @@ export default function Home() {
   );
 
   const NotesList: React.FC<NotesListProps> = ({ result, handleLoad }) => (
-    <div className="w-2/3 flex flex-col gap-2 max-h-[50vh] overflow-y-auto">
+    <div className="w-2/3 flex flex-col gap-2 max-h-[50vh] ">
       {result && <RefreshButton handleLoad={handleLoad} loading={loading} />}
-      {result?.length ? (
-        result.map((note, i) => <Note key={i} note={note} />)
-      ) : (
-        <span>No notes found</span>
-      )}
+      <div className="overflow-y-auto">
+        {result?.length ? (
+          result.map((note, i) => <Note key={i} note={note} />)
+        ) : (
+          <span>No notes found</span>
+        )}
+      </div>
     </div>
   );
 
@@ -112,9 +127,21 @@ export default function Home() {
       </Head>
       <Layout onLogout={() => console.log('Logging out...')}>
         <div className="flex flex-col gap-3 items-center mx-auto">
-          <h1 className="scroll-m-20 text-xl font-semibold tracking-tight lg:text-3xl">
+          <h1 className="scroll-m-20 text-xl font-semibold tracking-tight lg:text-3xl mb-4">
             Your IPFS Notes
           </h1>
+          {result && (
+            <div className="mb-3">
+              <p className="text-sm text-cyan-600 dark:text-cyan-400">
+                Press{" "}
+                <kbd className="pointer-events-none inline-flex h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-black dark:text-white opacity-100">
+                  <span className="text-xs">⌘</span>K
+                </kbd>
+                to search your notes
+              </p>
+              <CommandMenu ipfsDataList={result} open={open} onOpenChange={setOpen} />
+            </div>
+          )}
           {address ? (
             <div className="flex flex-col sm:flex-row gap-2">
               <NoteForm handleLoad={handleLoad} />
